@@ -1,0 +1,22 @@
+{
+  "name": "@3r/canvas-plus",
+  "version": "0.0.1",
+  "description": "a extension methods to canvas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo test"
+  },
+  "keywords": [
+    "canvas",
+    "tool",
+    "extension"
+  ],
+  "author": "@3r",
+  "license": "MIT",
+  "dependencies": {
+    "@3r/tool": "^1.3.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
