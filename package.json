@@ -18,5 +18,13 @@
   },
   "devDependencies": {
     "typescript": "^5.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/White-Dews/canvas-plus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/White-Dews/canvas-plus/issues"
+  },
+  "homepage": "https://github.com/White-Dews/canvas-plus#readme"
 }
