@@ -33,5 +33,15 @@
   },
   "homepage": "https://github.com/White-Dews/canvas-plus#readme",
   "type": "module",
-  "typings": "index.d.ts"
+  "typings": "index.d.ts",
+  "engines": {
+    "node": ">=8"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "pre-commit": [
+    "fix"
+  ],
+  "sideEffects": true
 }
