@@ -25,3 +25,10 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Codeclimate
+        uses: paambaati/codeclimate-action@v3.2.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.TESTREPORTERID }}
+        with:
+          coverageCommand: yarn run test
+          debug: true
