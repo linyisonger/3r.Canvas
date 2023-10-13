@@ -16,11 +16,6 @@ export function drawCapsule(this: any, x1: number, y1: number, x2: number, y2: n
 	const rad = Maths.degreeToRad(ang)
 
 	this.beginPath()
-	this.moveTo(p1.x, p1.y)
-	this.lineTo(p2.x, p2.y)
-	this.stroke()
-
-	this.beginPath()
 	this.arc(c1.x, c1.y, 20, 0 + rad, Math.PI + rad)
 	this.arc(c2.x, c2.y, 20, Math.PI + rad, rad)
 	this.closePath()
