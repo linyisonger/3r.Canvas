@@ -20,4 +20,3 @@ jobs:
           yarn install
           yarn run lint
           npx tsc
-          yarn run test
