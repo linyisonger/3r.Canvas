@@ -1,5 +1,5 @@
-import { v2, Vector2 } from '@3r/tool/lib/vertor2.js'
-import { Maths } from '@3r/tool/lib/maths.js'
+import { v2, Vector2 } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js'
+import { Maths } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js'
 
 /**
  * Draw a capsule 
@@ -28,7 +28,7 @@ export function drawCapsule(this: any, x1: number, y1: number, x2: number, y2: n
 	this.fill()
 }
 
-Object.defineProperty(CanvasRenderingContext2D.prototype, drawCapsule.name, drawCapsule)
+CanvasRenderingContext2D.prototype['drawCapsule'] = drawCapsule
 
 declare global {
 	interface CanvasRenderingContext2D {
@@ -38,3 +38,4 @@ declare global {
 		drawCapsule(this: any, x1: number, y1: number, x2: number, y2: number, radius: number): void
 	}
 }
+

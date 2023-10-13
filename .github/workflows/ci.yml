@@ -21,14 +21,3 @@ jobs:
           yarn run lint
           npx tsc
           yarn run test
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Codeclimate
-        uses: paambaati/codeclimate-action@v3.2.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.TESTREPORTERID }}
-        with:
-          coverageCommand: yarn run test
-          debug: true

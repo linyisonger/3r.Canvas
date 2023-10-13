@@ -1,5 +1,5 @@
-import { v2, Vector2 } from '@3r/tool/lib/vertor2.js';
-import { Maths } from '@3r/tool/lib/maths.js';
+import { v2, Vector2 } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js';
+import { Maths } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js';
 /**
  * Draw a capsule
  */
@@ -24,4 +24,4 @@ export function drawCapsule(x1, y1, x2, y2, radius) {
     this.stroke();
     this.fill();
 }
-Object.defineProperty(CanvasRenderingContext2D.prototype, drawCapsule.name, drawCapsule);
+CanvasRenderingContext2D.prototype['drawCapsule'] = drawCapsule;

@@ -13,16 +13,13 @@
             display: flex;
         }
     </style>
-    <script src="./index.js"></script>
 </head>
 
 <body>
 
     <canvas id="drawCapsule"></canvas>
     <script type="module">
-        import { Maths } from "https://unpkg.com/@3r/tool/lib/maths.js";
-        import { Vector2, v2 } from "https://gcore.jsdelivr.net/npm/@3r/tool/lib/vertor2.js";
-        import "https://gcore.jsdelivr.net/npm/@3r/canvas-plus@0.0.7/index.js"
+        import "./index.js"
 
 
         /** @type {HTMLCanvasElement} */
@@ -35,11 +32,9 @@
 
         ctx.strokeStyle = '#f00'
         ctx.lineWidth = 8;
-        canvas.addEventListener("mousemove", (ev) => {
-            console.log(ev);
-            ctx.clearRect(0, 0, width, height)
-            ctx.drawCapsule(ev.offsetX, ev.offsetY, 500, 500, 50)
-        })
+
+        ctx.clearRect(0, 0, width, height)
+        ctx.drawCapsule(100, 100, 500, 500, 50) 
     </script>
 </body>
 
