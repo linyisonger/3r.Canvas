@@ -10,6 +10,10 @@ export declare function inverseColor(this: CanvasRenderingContext2D, x?: number,
  * Image grayscale processing
  */
 export declare function grayProcessing(this: CanvasRenderingContext2D, x?: number, y?: number, w?: number, h?: number): void;
+/**
+ * Draw a rounded Rect
+ */
+export declare function roundedRect(this: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, radii: number | number[]): void;
 declare global {
     interface CanvasRenderingContext2D {
         /**
@@ -24,5 +28,9 @@ declare global {
          * Image grayscale processing
          */
         grayProcessing(this: CanvasRenderingContext2D, x?: number, y?: number, w?: number, h?: number): void;
+        /**
+         * Draw a rounded Rect
+         */
+        roundedRect(this: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, radii: number | number[]): void;
     }
 }

@@ -15,70 +15,70 @@ HTML 5
 ```html
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        #drawCapsule {
-            width: 900px;
-            height: 900px;
-            display: flex;
-        }
+      #drawCapsule {
+        width: 900px;
+        height: 900px;
+        display: flex;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <canvas id="drawCapsule"></canvas>
     <script type="module">
-        import "../index.js"
-        /** @type {HTMLCanvasElement} */
-        let canvas = document.querySelector("#drawCapsule")
-        let ctx = canvas.getContext('2d')
-        let width = canvas.clientWidth;
-        let height = canvas.clientHeight;
-        canvas.width = width;
-        canvas.height = height;
+      import "../index.js";
+      /** @type {HTMLCanvasElement} */
+      let canvas = document.querySelector("#drawCapsule");
+      let ctx = canvas.getContext("2d");
+      let width = canvas.clientWidth;
+      let height = canvas.clientHeight;
+      canvas.width = width;
+      canvas.height = height;
 
-        ctx.clearRect(0, 0, width, height)
+      ctx.clearRect(0, 0, width, height);
 
-        // Draw Gird
-        ctx.strokeStyle = '#999'
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        for (let i = 0; i < 2; i++) {
-            ctx.moveTo(300 * (i + 1), 0)
-            ctx.lineTo(300 * (i + 1), height)
-        }
-        for (let i = 0; i < 2; i++) {
-            ctx.moveTo(0, 300 * (i + 1))
-            ctx.lineTo(width, 300 * (i + 1))
-        }
-        ctx.closePath();
-        ctx.stroke();
+      // Draw Gird
+      ctx.strokeStyle = "#999";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let i = 0; i < 2; i++) {
+        ctx.moveTo(300 * (i + 1), 0);
+        ctx.lineTo(300 * (i + 1), height);
+      }
+      for (let i = 0; i < 2; i++) {
+        ctx.moveTo(0, 300 * (i + 1));
+        ctx.lineTo(width, 300 * (i + 1));
+      }
+      ctx.closePath();
+      ctx.stroke();
 
-        // Draw a capsule 
-        ctx.strokeStyle = '#f00'
-        ctx.fillStyle = "#555"
-        ctx.lineWidth = 8;
-        ctx.drawCapsule(100, 100, 200, 200, 30)
+      // Draw a capsule
+      ctx.strokeStyle = "#f00";
+      ctx.fillStyle = "#555";
+      ctx.lineWidth = 8;
+      ctx.drawCapsule(100, 100, 200, 200, 30);
 
+      const imageUrl = "https://pic4.zhimg.com/80/v2-3e398c920e60082e366c05a52b38c913_720w.webp";
+      const image = new Image();
+      image.src = imageUrl;
+      image.setAttribute("crossOrigin", "");
+      image.onload = () => {
+        ctx.drawImage(image, 300, 0, 300, 300);
+        ctx.inverseColor(300, 0, 300, 300);
 
-        const imageUrl = 'https://pic4.zhimg.com/80/v2-3e398c920e60082e366c05a52b38c913_720w.webp'
-        const image = new Image()
-        image.src = imageUrl
-        image.setAttribute('crossOrigin', '');
-        image.onload = () => {
-            ctx.drawImage(image, 300, 0, 300, 300)
-            ctx.inverseColor(300, 0, 300, 300)
-            
-            ctx.drawImage(image, 600, 0, 300, 300)
-            ctx.grayProcessing(600, 0, 300, 300)
-        }
+        ctx.drawImage(image, 600, 0, 300, 300);
+        ctx.grayProcessing(600, 0, 300, 300);
+      };
+
+      ctx.roundedRect(10, 310, 80, 100, 10);
+      ctx.roundedRect(40, 350, 80, 100, [10, 20, 30, 40]);
+      ctx.roundedRect(80, 400, 80, 100, [10, 40]);
     </script>
-</body>
-
+  </body>
 </html>
 ```
 

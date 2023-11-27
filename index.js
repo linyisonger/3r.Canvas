@@ -1,5 +1,5 @@
-import { v2, Vector2 } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js';
-import { Maths } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js';
+import { Convertor, v2, Vector2 } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.4.3/index.js';
+import { Maths } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.4.3/index.js';
 /**
  * Draw a capsule
  */
@@ -63,6 +63,29 @@ export function grayProcessing(x, y, w, h) {
     }
     this.putImageData(imageData, x, y);
 }
+/**
+ * Draw a rounded Rect
+ */
+export function roundedRect(x, y, w, h, radii) {
+    this.beginPath();
+    const minRadius = 0;
+    const maxRadius = Math.min(w, h) / 2;
+    console.log(Convertor.fourValueSplit(radii));
+    let [topLeft, topRight, bottomRight, bottomLeft] = Convertor.fourValueSplit(radii);
+    topLeft = topLeft.inRange(minRadius, maxRadius);
+    topRight = topRight.inRange(minRadius, maxRadius);
+    bottomRight = bottomRight.inRange(minRadius, maxRadius);
+    bottomLeft = bottomLeft.inRange(minRadius, maxRadius);
+    this.moveTo(x, y + topLeft);
+    this.arcTo(x, y, x + topLeft, y, topLeft);
+    this.arcTo(x + w, y, x + w, y + topRight, topRight);
+    this.arcTo(x + w, y + h, x + w - bottomRight, y + h, bottomRight);
+    this.arcTo(x, y + h, x, y + h - bottomLeft, bottomLeft);
+    this.closePath();
+    this.stroke();
+    this.fill();
+}
 CanvasRenderingContext2D.prototype['drawCapsule'] = drawCapsule;
 CanvasRenderingContext2D.prototype['inverseColor'] = inverseColor;
 CanvasRenderingContext2D.prototype['grayProcessing'] = grayProcessing;
+CanvasRenderingContext2D.prototype['roundedRect'] = roundedRect;

@@ -1,6 +1,5 @@
-import { v2, Vector2 } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js'
+import { Convertor, v2, Vector2 } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js'
 import { Maths } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js'
-
 /**
  * Draw a capsule 
  */
@@ -40,8 +39,6 @@ export function inverseColor(this: CanvasRenderingContext2D, x?: number, y?: num
 	}
 	this.putImageData(imageData, x, y)
 }
-
-
 /**
  * Image grayscale processing
  */
@@ -66,20 +63,39 @@ export function grayProcessing(this: CanvasRenderingContext2D, x?: number, y?: n
 	}
 	this.putImageData(imageData, x, y)
 }
-
+/**
+ * Draw a rounded Rect
+ */
+export function roundedRect(this: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, radii: number | number[]) {
+	this.beginPath()
+	const minRadius = 0
+	const maxRadius = Math.min(w, h) / 2
+	let [topLeft, topRight, bottomRight, bottomLeft] = Convertor.fourValueSplit(radii)
+	topLeft = topLeft.inRange(minRadius, maxRadius)
+	topRight = topRight.inRange(minRadius, maxRadius)
+	bottomRight = bottomRight.inRange(minRadius, maxRadius)
+	bottomLeft = bottomLeft.inRange(minRadius, maxRadius)
+	this.moveTo(x, y + topLeft)
+	this.arcTo(x, y, x + topLeft, y, topLeft)
+	this.arcTo(x + w, y, x + w, y + topRight, topRight)
+	this.arcTo(x + w, y + h, x + w - bottomRight, y + h, bottomRight)
+	this.arcTo(x, y + h, x, y + h - bottomLeft, bottomLeft)
+	this.closePath()
+	this.stroke()
+	this.fill()
+}
 
 
 CanvasRenderingContext2D.prototype['drawCapsule'] = drawCapsule
 CanvasRenderingContext2D.prototype['inverseColor'] = inverseColor
 CanvasRenderingContext2D.prototype['grayProcessing'] = grayProcessing
-
+CanvasRenderingContext2D.prototype['roundedRect'] = roundedRect
 declare global {
 	interface CanvasRenderingContext2D {
 		/**
 		 * Draw a capsule 
 		 */
 		drawCapsule(this: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, radius: number): void
-
 		/**
 		 * Invert image color
 		 */
@@ -88,6 +104,10 @@ declare global {
 		 * Image grayscale processing
 		 */
 		grayProcessing(this: CanvasRenderingContext2D, x?: number, y?: number, w?: number, h?: number): void
+		/**
+		 * Draw a rounded Rect
+		 */
+		roundedRect(this: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, radii: number | number[]): void
 	}
 }
 
