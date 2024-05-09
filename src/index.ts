@@ -1,5 +1,41 @@
-import { Convertor, v2, Vector2 } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js'
-import { Maths } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.3.2/index.js'
+import { Convertor, v2, Vector2 } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.4.5/index.js'
+import { Maths } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.4.5/index.js'
+
+function bin2hex(s: string) {
+	var i, l, o = '',
+		n;
+	s += '';
+	for (i = 0, l = s.length; i < l; i++) {
+		n = s.charCodeAt(i)
+			.toString(16);
+		o += n.length < 2 ? '0' + n : n;
+	}
+	return o;
+}
+
+/**
+ * Get a fingerprint sign
+ * @returns 
+ */
+export function fingerprint() {
+	const canvas = document.createElement('canvas');
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return
+	const txt = location.origin
+	ctx.textBaseline = "top";
+	ctx.font = "14px 'Arial'";
+	ctx.fillStyle = "#f60";
+	ctx.fillRect(125, 1, 62, 20);
+	ctx.fillStyle = "#069";
+	ctx.fillText(txt, 2, 15);
+	ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+	ctx.fillText(txt, 4, 17);
+	const b64 = canvas.toDataURL().replace("data:image/png;base64,", "");
+	const bin = atob(b64);
+	return {
+		sign: bin2hex(bin.slice(-16, -12))
+	}
+}
 /**
  * Draw a capsule 
  */
@@ -86,10 +122,12 @@ export function roundedRect(this: CanvasRenderingContext2D, x: number, y: number
 }
 
 
+
 CanvasRenderingContext2D.prototype['drawCapsule'] = drawCapsule
 CanvasRenderingContext2D.prototype['inverseColor'] = inverseColor
 CanvasRenderingContext2D.prototype['grayProcessing'] = grayProcessing
 CanvasRenderingContext2D.prototype['roundedRect'] = roundedRect
+
 declare global {
 	interface CanvasRenderingContext2D {
 		/**

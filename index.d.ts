@@ -1,4 +1,11 @@
 /**
+ * Get a fingerprint sign
+ * @returns
+ */
+export declare function fingerprint(): {
+    sign: string;
+} | undefined;
+/**
  * Draw a capsule
  */
 export declare function drawCapsule(this: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, radius: number): void;
