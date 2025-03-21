@@ -69,7 +69,6 @@ export function inverseColor(this: CanvasRenderingContext2D, x?: number, y?: num
 			imageData.data[idx + 0] = 255 - imageData.data[idx + 0]
 			imageData.data[idx + 1] = 255 - imageData.data[idx + 1]
 			imageData.data[idx + 2] = 255 - imageData.data[idx + 2]
-			imageData.data[idx + 3] = 255
 		}
 	}
 	this.putImageData(imageData, x, y)
@@ -93,7 +92,6 @@ export function grayProcessing(this: CanvasRenderingContext2D, x?: number, y?: n
 			imageData.data[idx + 0] = gray
 			imageData.data[idx + 1] = gray
 			imageData.data[idx + 2] = gray
-			imageData.data[idx + 3] = 255
 		}
 	}
 	this.putImageData(imageData, x, y)
