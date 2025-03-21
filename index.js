@@ -1,5 +1,4 @@
-import { Convertor, v2, Vector2 } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.4.5/index.js';
-import { Maths } from 'https://cdn.jsdelivr.net/npm/@3r/tool@1.4.5/index.js';
+const { Convertor, v2, Vector2, Maths } = await Promise.race([import('https://cdn.jsdelivr.net/npm/@3r/tool@1.4.5/index.js'), import("https://gcore.jsdelivr.net/npm/@3r/tool@1.4.5/index.js")]);
 function bin2hex(s) {
     var i, l, o = '', n;
     s += '';

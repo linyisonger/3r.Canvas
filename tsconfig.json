@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2016", // 指定ECMAScript目标版本
-    "module": "es6", // 指定模块化类型
+    "target": "es2017", // 指定ECMAScript目标版本
+    "module": "ES2022", // 指定模块化类型
     "declaration": true, // 生成 `.d.ts` 文件
     "outDir": "./", // 编译后生成的文件目录
     "strict": true, // 开启严格的类型检测
@@ -13,6 +13,9 @@
     "baseUrl": "./",
     "paths": {
       "https://cdn.jsdelivr.net/npm/@3r/tool@1.4.5/index.js": [
+        "node_modules/@3r/tool" // Re-map to the type
+      ],
+      "https://gcore.jsdelivr.net/npm/@3r/tool@1.4.5/index.js": [
         "node_modules/@3r/tool" // Re-map to the type
       ],
       "@/*": ["*"]
