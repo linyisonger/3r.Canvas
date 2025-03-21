@@ -1,6 +1,6 @@
 {
   "name": "@3r/canvas-plus",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "a extension methods to canvas.",
   "main": "index.js",
   "scripts": {
