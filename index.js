@@ -247,6 +247,38 @@ export function luminance({ x, y, w, h, v }) {
         }
     });
 }
+/**
+ * Image layer size
+ */
+export function layerSize({ x, y, w, h }) {
+    x !== null && x !== void 0 ? x : (x = 0);
+    y !== null && y !== void 0 ? y : (y = 0);
+    w !== null && w !== void 0 ? w : (w = this.canvas.width);
+    h !== null && h !== void 0 ? h : (h = this.canvas.height);
+    let minX = Number.MAX_SAFE_INTEGER;
+    let maxX = Number.MIN_SAFE_INTEGER;
+    let minY = Number.MAX_SAFE_INTEGER;
+    let maxY = Number.MIN_SAFE_INTEGER;
+    const imageData = this.getImageData(x, y, w, h);
+    for (let x = 0; x < imageData.width; x++) {
+        for (let y = 0; y < imageData.height; y++) {
+            const idx = (x + y * imageData.width) * 4;
+            let a = imageData.data[idx + 3];
+            if (a != 0) {
+                minX = Math.min(minX, x);
+                maxX = Math.max(maxX, x);
+                minY = Math.min(minY, y);
+                maxY = Math.max(maxY, y);
+            }
+        }
+    }
+    return {
+        x: minX,
+        y: minY,
+        w: maxX - minX,
+        h: maxY - minY,
+    };
+}
 CanvasRenderingContext2D.prototype['drawCapsule'] = drawCapsule;
 CanvasRenderingContext2D.prototype['inverseColor'] = inverseColor;
 CanvasRenderingContext2D.prototype['grayProcessing'] = grayProcessing;
@@ -254,3 +286,4 @@ CanvasRenderingContext2D.prototype['roundedRect'] = roundedRect;
 CanvasRenderingContext2D.prototype['exposure'] = exposure;
 CanvasRenderingContext2D.prototype['contrastRatio'] = contrastRatio;
 CanvasRenderingContext2D.prototype['luminance'] = luminance;
+CanvasRenderingContext2D.prototype['layerSize'] = layerSize;

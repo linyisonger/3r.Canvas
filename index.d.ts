@@ -11,6 +11,12 @@ interface ImageDataParams {
         a: number;
     };
 }
+interface IRect {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+}
 /**
  * Get a fingerprint sign
  * @returns
@@ -46,6 +52,10 @@ export declare function contrastRatio(this: CanvasRenderingContext2D, { x, y, w,
  * Image luminance
  */
 export declare function luminance(this: CanvasRenderingContext2D, { x, y, w, h, v }: ImageDataParams): void;
+/**
+ * Image layer size
+ */
+export declare function layerSize(this: CanvasRenderingContext2D, { x, y, w, h }: ImageDataParams): IRect;
 declare global {
     interface CanvasRenderingContext2D {
         /**
@@ -76,6 +86,10 @@ declare global {
          * Image luminance
          */
         luminance(this: CanvasRenderingContext2D, params?: ImageDataParams): void;
+        /**
+         * Image layerSize
+         */
+        layerSize(this: CanvasRenderingContext2D, params?: ImageDataParams): IRect;
     }
 }
 export {};
