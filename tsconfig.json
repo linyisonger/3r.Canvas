@@ -9,7 +9,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "lib": ["DOM", "ES6"],
+    "lib": ["DOM", "ES2021"],
     "baseUrl": "./",
     "paths": {
       "https://cdn.jsdelivr.net/npm/@3r/tool@1.4.5/index.js": [

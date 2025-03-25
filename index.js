@@ -1,11 +1,13 @@
-const { Convertor, v2, Vector2, Maths } = await Promise.race([import('https://cdn.jsdelivr.net/npm/@3r/tool@1.4.5/index.js'), import("https://gcore.jsdelivr.net/npm/@3r/tool@1.4.5/index.js")]);
+const { Convertor, v2, Vector2, Maths } = await Promise.any([
+    import("https://cdn.jsdelivr.net/npm/@3r/tool@1.4.5/index.js"),
+    import("https://gcore.jsdelivr.net/npm/@3r/tool@1.4.5/index.js"),
+]);
 function bin2hex(s) {
-    var i, l, o = '', n;
-    s += '';
+    var i, l, o = "", n;
+    s += "";
     for (i = 0, l = s.length; i < l; i++) {
-        n = s.charCodeAt(i)
-            .toString(16);
-        o += n.length < 2 ? '0' + n : n;
+        n = s.charCodeAt(i).toString(16);
+        o += n.length < 2 ? "0" + n : n;
     }
     return o;
 }
@@ -31,9 +33,9 @@ function rgb2hsv(r, g, b) {
         if (r === v)
             h = tb - tg;
         else if (g === v)
-            h = (1 / 3) + tr - tb;
+            h = 1 / 3 + tr - tb;
         else if (b === v)
-            h = (2 / 3) + tg - tr;
+            h = 2 / 3 + tg - tr;
         if (h < 0)
             h += 1;
         else if (h > 1)
@@ -49,7 +51,7 @@ function hsv2rgb(l, m, n) {
     let g = 0;
     let b = 0;
     if (m === 0) {
-        l = m = n = Math.round(255 * n / 100);
+        l = m = n = Math.round((255 * n) / 100);
         r = l;
         g = m;
         b = n;
@@ -129,8 +131,8 @@ function imageData(ctx, { x, y, w, h, effect }) {
  * @returns
  */
 export function fingerprint() {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
     if (!ctx)
         return;
     const txt = location.origin;
@@ -145,7 +147,7 @@ export function fingerprint() {
     const b64 = canvas.toDataURL().replace("data:image/png;base64,", "");
     const bin = atob(b64);
     return {
-        sign: bin2hex(bin.slice(-16, -12))
+        sign: bin2hex(bin.slice(-16, -12)),
     };
 }
 /**
@@ -171,17 +173,27 @@ export function drawCapsule(x1, y1, x2, y2, radius) {
  * Invert image color
  */
 export function inverseColor({ x, y, w, h }) {
-    imageData(this, { x, y, w, h, effect: (r, g, b, a) => Object({ r: 255 - r, g: 255 - g, b: 255 - b, a }) });
+    imageData(this, {
+        x,
+        y,
+        w,
+        h,
+        effect: (r, g, b, a) => Object({ r: 255 - r, g: 255 - g, b: 255 - b, a }),
+    });
 }
 /**
  * Image grayscale processing
  */
 export function grayProcessing({ x, y, w, h }) {
     imageData(this, {
-        x, y, w, h, effect: (r, g, b, a) => {
-            const gray = .299 * r + .587 * g + .114 * b;
+        x,
+        y,
+        w,
+        h,
+        effect: (r, g, b, a) => {
+            const gray = 0.299 * r + 0.587 * g + 0.114 * b;
             return { r: gray, g: gray, b: gray, a };
-        }
+        },
     });
 }
 /**
@@ -210,13 +222,17 @@ export function roundedRect(x, y, w, h, radii) {
  */
 export function exposure({ x, y, w, h, v }) {
     imageData(this, {
-        x, y, w, h, effect: (r, g, b, a) => {
+        x,
+        y,
+        w,
+        h,
+        effect: (r, g, b, a) => {
             v !== null && v !== void 0 ? v : (v = 1);
             r = Maths.inRange(r * v, 0, 255);
             g = Maths.inRange(g * v, 0, 255);
             b = Maths.inRange(b * v, 0, 255);
             return { r, g, b, a };
-        }
+        },
     });
 }
 /**
@@ -224,13 +240,17 @@ export function exposure({ x, y, w, h, v }) {
  */
 export function contrastRatio({ x, y, w, h, v }) {
     imageData(this, {
-        x, y, w, h, effect: (r, g, b, a) => {
+        x,
+        y,
+        w,
+        h,
+        effect: (r, g, b, a) => {
             v !== null && v !== void 0 ? v : (v = 1);
             r = Maths.inRange((r - 128) * v + 128, 0, 255);
             g = Maths.inRange((g - 128) * v + 128, 0, 255);
             b = Maths.inRange((b - 128) * v + 128, 0, 255);
             return { r, g, b, a };
-        }
+        },
     });
 }
 /**
@@ -238,13 +258,17 @@ export function contrastRatio({ x, y, w, h, v }) {
  */
 export function luminance({ x, y, w, h, v }) {
     imageData(this, {
-        x, y, w, h, effect: (r, g, b, a) => {
+        x,
+        y,
+        w,
+        h,
+        effect: (r, g, b, a) => {
             v !== null && v !== void 0 ? v : (v = 1);
             const hsv = rgb2hsv(r, g, b);
-            hsv[2] *= (1 + v);
+            hsv[2] *= 1 + v;
             const rgb = hsv2rgb(hsv[0], hsv[1], hsv[2]);
             return { r: rgb[0], g: rgb[1], b: rgb[2], a };
-        }
+        },
     });
 }
 /**
@@ -279,11 +303,11 @@ export function layerSize({ x, y, w, h }) {
         h: maxY - minY,
     };
 }
-CanvasRenderingContext2D.prototype['drawCapsule'] = drawCapsule;
-CanvasRenderingContext2D.prototype['inverseColor'] = inverseColor;
-CanvasRenderingContext2D.prototype['grayProcessing'] = grayProcessing;
-CanvasRenderingContext2D.prototype['roundedRect'] = roundedRect;
-CanvasRenderingContext2D.prototype['exposure'] = exposure;
-CanvasRenderingContext2D.prototype['contrastRatio'] = contrastRatio;
-CanvasRenderingContext2D.prototype['luminance'] = luminance;
-CanvasRenderingContext2D.prototype['layerSize'] = layerSize;
+CanvasRenderingContext2D.prototype["drawCapsule"] = drawCapsule;
+CanvasRenderingContext2D.prototype["inverseColor"] = inverseColor;
+CanvasRenderingContext2D.prototype["grayProcessing"] = grayProcessing;
+CanvasRenderingContext2D.prototype["roundedRect"] = roundedRect;
+CanvasRenderingContext2D.prototype["exposure"] = exposure;
+CanvasRenderingContext2D.prototype["contrastRatio"] = contrastRatio;
+CanvasRenderingContext2D.prototype["luminance"] = luminance;
+CanvasRenderingContext2D.prototype["layerSize"] = layerSize;
